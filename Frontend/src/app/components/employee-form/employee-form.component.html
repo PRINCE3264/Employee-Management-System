@@ -1,0 +1,123 @@
+<div class="container py-5 animate-fade-in">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card border-0 shadow-lg overflow-hidden">
+        <div class="card-header glass border-0 py-4 px-4 d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <div class="brand-icon bg-primary text-white rounded-3 me-3 d-flex align-items-center justify-content-center shadow-sm" style="width: 48px; height: 48px;">
+               <i class="bi bi-person-badge-fill fs-4"></i>
+            </div>
+            <div>
+              <h4 class="mb-1 text-main">Employee<span class="text-primary">Management</span> {{ isEditMode ? 'Editor' : 'Manager' }}</h4>
+              <p class="text-muted small mb-0">{{ isEditMode ? 'Modify record for ' + employeeForm.get('name')?.value : 'Add a new member to your workforce' }}</p>
+            </div>
+          </div>
+          <a routerLink="/employees" class="btn btn-icon btn-light rounded-circle shadow-none">
+            <i class="bi bi-x-lg"></i>
+          </a>
+        </div>
+        
+        <div class="card-body p-4 p-md-5">
+          <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="needs-validation">
+            
+            <!-- Name Field -->
+            <div class="mb-4">
+              <label for="name" class="form-label small fw-bold text-muted text-uppercase mb-2">Full Name</label>
+              <div class="input-group-custom" [class.is-invalid]="employeeForm.get('name')?.touched && employeeForm.get('name')?.invalid">
+                <i class="bi bi-person text-muted"></i>
+                <input 
+                  type="text" 
+                  id="name" 
+                  formControlName="name" 
+                  class="form-control-custom" 
+                  placeholder="e.g. John Sebastian Doe"
+                >
+              </div>
+              <div class="text-danger small mt-2 d-flex align-items-center" *ngIf="employeeForm.get('name')?.touched && employeeForm.get('name')?.invalid">
+                <i class="bi bi-exclamation-circle me-1"></i> A valid name (min 3 chars) is required.
+              </div>
+            </div>
+
+            <!-- Department Field -->
+            <div class="mb-4">
+              <label for="department" class="form-label small fw-bold text-muted text-uppercase mb-2">Department</label>
+              <div class="input-group-custom" [class.is-invalid]="employeeForm.get('department')?.touched && employeeForm.get('department')?.invalid">
+                <i class="bi bi-briefcase text-muted"></i>
+                <input 
+                  id="department" 
+                  formControlName="department" 
+                  list="deptList"
+                  class="form-control-custom"
+                  placeholder="Select or type new department..."
+                >
+              </div>
+              <datalist id="deptList">
+                <option *ngFor="let dep of departments" [value]="dep"></option>
+              </datalist>
+              <div class="text-danger small mt-2 d-flex align-items-center" *ngIf="employeeForm.get('department')?.touched && employeeForm.get('department')?.invalid">
+                <i class="bi bi-exclamation-circle me-1"></i> Please specify a department.
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <!-- Salary Field -->
+              <div class="col-12 col-md-6 mb-3">
+                <label for="salary" class="form-label small fw-bold text-muted text-uppercase mb-2">Monthly Salary (INR)</label>
+                <div class="input-group-custom" [class.is-invalid]="employeeForm.get('salary')?.touched && employeeForm.get('salary')?.invalid">
+                  <i class="bi bi-currency-rupee text-muted"></i>
+                  <input 
+                    type="number" 
+                    id="salary" 
+                    formControlName="salary" 
+                    class="form-control-custom" 
+                    placeholder="0.00"
+                  >
+                </div>
+                <div class="text-danger small mt-2 d-flex align-items-center" *ngIf="employeeForm.get('salary')?.touched && employeeForm.get('salary')?.invalid">
+                  <i class="bi bi-exclamation-circle me-1"></i> Salary must be positive.
+                </div>
+              </div>
+
+              <!-- Joining Date Field -->
+              <div class="col-12 col-md-6 mb-3">
+                <label for="joiningDate" class="form-label small fw-bold text-muted text-uppercase mb-2">Joining Date</label>
+                <div class="input-group-custom" [class.is-invalid]="employeeForm.get('joiningDate')?.touched && employeeForm.get('joiningDate')?.invalid">
+                  <i class="bi bi-calendar-event text-muted"></i>
+                  <input 
+                    type="date" 
+                    id="joiningDate" 
+                    formControlName="joiningDate" 
+                    class="form-control-custom"
+                  >
+                </div>
+                <div class="text-danger small mt-2 d-flex align-items-center" *ngIf="employeeForm.get('joiningDate')?.touched && employeeForm.get('joiningDate')?.invalid">
+                  <i class="bi bi-exclamation-circle me-1"></i> Date is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex flex-column flex-md-row gap-3 mt-5">
+              <button 
+                type="submit" 
+                class="btn btn-primary px-5 py-3 shadow-sm d-flex align-items-center justify-content-center order-1 order-md-2 flex-grow-1"
+                [disabled]="employeeForm.invalid || loading"
+              >
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                <i class="bi bi-check-circle-fill me-2" *ngIf="!loading"></i>
+                {{ isEditMode ? 'Save Changes' : 'Confirm Registration' }}
+              </button>
+              <a 
+                routerLink="/employees" 
+                class="btn btn-light px-5 py-3 border order-2 order-md-1 flex-grow-1"
+              >
+                Cancel
+              </a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

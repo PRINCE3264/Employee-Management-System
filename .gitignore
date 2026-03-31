@@ -1,0 +1,31 @@
+# .gitignore for .NET and Angular
+
+# Dotnet
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/
+
+# Frontend (Angular)
+Frontend/node_modules/
+Frontend/dist/
+Frontend/.angular/
+Frontend/tmp/
+Frontend/out-tsc/
+Frontend/bazel-out/
+Frontend/README.md
+
+# Logs
+Logs/
+
+# Environment
+.env
+appsettings.Development.json
+
+# Misc
+.DS_Store
+Thumbs.db
