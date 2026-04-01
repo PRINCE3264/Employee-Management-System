@@ -155,8 +155,8 @@ Feel free to fork the repo and submit a pull request.
 
 ## 📧 Contact
 
-👤 Your Name
-📧 [your-email@example.com](mailto:your-email@example.com)
+👤 Your Name:- PRINCE KUMAR VIDYARTHI 
+📧 vidyarthiprince@gmail.com
 🔗 LinkedIn: https://linkedin.com/in/your-profile
 
 ---
